@@ -44,7 +44,6 @@ int _printf(const char *format, ...)
 			if (format[i] != '%')
 				_putchar(format[i]), length++;
 		}
-		_putchar('\0');
 		va_end(args);
 		return (length);
 	}
