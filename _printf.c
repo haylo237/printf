@@ -37,6 +37,8 @@ int _printf(const char *format, ...)
 						_putchar('%'), length++;
 						break;
 					default:
+						_putchar(format[i - 1]);
+						_putchar(format[i]);
 						break;
 				}
 				continue;
