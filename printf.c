@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 
 	length = 0;
 
-	if (format == NULL || format == "%")
+	if (format == NULL)
 		return (-1);
 
 	while (format)
@@ -78,6 +78,9 @@ int process_format_specifier(va_list args, char specifier)
 			length++;
 			break;
 		default:
+			_putchar('%');
+			_putchar(specifier);
+			length = length + 2;
 			return (-1);
 	}
 	return (length);
