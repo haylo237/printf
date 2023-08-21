@@ -28,8 +28,8 @@ int _printf(const char *format, ...)
 				length++;
 				i++;
 			}
-			else if (format[i + 1] == ' ')
-				return (-1);
+			else if (format[i + 1] == '\0')
+				break;
 			else if (format[i + 1] != '\0')
 			{
 				if (format_switch(args, format[i + 1], &length) == -1)
