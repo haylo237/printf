@@ -60,17 +60,15 @@ int process_format_specifier(va_list args, char specifier)
 			length++;
 			break;
 		case 's':
-			{
-				char *str = va_arg(args, char *);
-				int j;
+			char *str = va_arg(args, char *);
+			int j;
 
-				if (str == NULL)
-					str = "(null)";
-				for (j = 0; str[j] != '\0'; j++)
-				{
-					_putchar(str[j]);
-					length++;
-				}
+			if (str == NULL)
+				str = "(null)";
+			for (j = 0; str[j] != '\0'; j++)
+			{
+				_putchar(str[j]);
+				length++;
 			}
 			break;
 		case '%':
