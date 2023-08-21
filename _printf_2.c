@@ -7,64 +7,41 @@
  */
 int _printf(const char *format, ...)
 {
+	int i, length;
 	va_list args;
 
-	int length = 0;
-	int i = 0;
+	length = 0;
 
 	if (format == NULL)
-        return (-1);
+		return (-1);
 
-	va_start(args, format);
-
-	while (format[i] != '\0')
+	while (format)
 	{
-		if (format[i] == '%')
+		va_start(args, format);
+		for (i = 0; format[i] != '\0'; i++)
 		{
-			i++;
-			if (format[i] == '\0')
-				break;
-
-			if (format[i] == '%')
+			if (format[i] == '%' && format[i - 1] != '%')
 			{
-				_putchar('%');
-				length++;
-			}
-			else if (format[i] == 'c')
-			{
-				char c = va_arg(args, int);
-				_putchar(c);
-				length++;
-			}
-			else if (format[i] == 's')
-			{
-				char *str = va_arg(args, char *);
-				if (str == NULL)
-					str = "(null)";
-
-				while (*str)
+				if (format[i + 1] == '\0')
+					return (-1);
+				if (format[i + 1] == ' ')
 				{
-					_putchar(*str);
-					str++;
-					length++;
+					length += process_format_specifier(args, format[i + 2]);
+					i = i + 2;
+					continue;
 				}
+				length += process_format_specifier(args, format[i + 1]);
+				i++;
 			}
 			else
 			{
-				_putchar('%');
 				_putchar(format[i]);
-				length += 2;
+				length++;
 			}
 		}
-		else
-		{
-			_putchar(format[i]);
-			length++;
-		}
-		i++;
+		va_end(args);
+		return (length);
 	}
-
-	va_end(args);
 	return (length);
 }
 /**
