@@ -75,10 +75,10 @@ int format_switch(va_list args, char specifier, int *length)
 				}
 			}
 			break;
-		case '%':
-			_putchar('%');
-			(*length)++;
-			break;
+	/*	case '%':*/
+	/*		_putchar('%');*/
+	/*		(*length)++;*/
+	/*		break;*/
 		default:
 			return (-1);
 	}
