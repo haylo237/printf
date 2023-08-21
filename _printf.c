@@ -66,6 +66,8 @@ int format_switch(va_list args, char specifier, int *length)
 				char *str = va_arg(args, char *);
 				int j;
 
+				if (str == NULL)
+					str = "(null)";
 				for (j = 0; str[j] != '\0'; j++)
 				{
 					_putchar(str[j]);
