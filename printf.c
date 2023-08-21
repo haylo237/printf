@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 
 	length = 0;
 
-	if (format == NULL)
+	if (format == NULL || format == '%')
 		return (-1);
 
 	while (format)
