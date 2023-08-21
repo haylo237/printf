@@ -13,32 +13,34 @@ int _printf(const char *format, ...)
 
 	length = 0;
 
-	va_start(args, format);
-
 	if (format == NULL)
 		return (-1);
 
-	for (i = 0; format[i] != '\0'; i++)
+	while (format)
 	{
-		if (format[i] == '%' && format[i - 1] != '%')
+		va_start(args, format);
+		for (i = 0; format[i] != '\0'; i++)
 		{
-			if (format[i + 1] == ' ')
+			if (format[i] == '%' && format[i - 1] != '%')
 			{
-				length += process_format_specifier(args, format[i + 2]);
-				i = i + 2;
-				continue;
+				if (format[i + 1] == ' ')
+				{
+					length += process_format_specifier(args, format[i + 2]);
+					i = i + 2;
+					continue;
+				}
+				length += process_format_specifier(args, format[i + 1]);
+				i++;
 			}
-			length += process_format_specifier(args, format[i + 1]);
-			i++;
+			else
+			{
+				_putchar(format[i]);
+				length++;
+			}
 		}
-		else
-		{
-			_putchar(format[i]);
-			length++;
-		}
+		va_end(args);
+		return (length);
 	}
-	va_end(args);
-
 	return (length);
 }
 /**
