@@ -72,8 +72,6 @@ int process_format_specifier(va_list args, char specifier)
 				_putchar(str[j]);
 				length++;
 			}
-			if (str == "(null)")
-				return (6);
 			break;
 		case '%':
 			_putchar('%');
