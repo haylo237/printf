@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
-	for (int i = 0; format[i] != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%' && format[i - 1] != '%')
 		{
@@ -60,7 +60,8 @@ int process_format_specifier(va_list args, char specifier)
 			length++;
 			break;
 		case 's':
-			char *str = va_arg(args, char *);
+			char *str;
+			str = va_arg(args, char *);
 			int j;
 
 			if (str == NULL)
