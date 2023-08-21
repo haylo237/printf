@@ -18,24 +18,18 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
-	for (i = 0; format[i] != '\0'; i++)
+	for (int i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i - 1] != '%')
 		{
-			if (format[i + 1] == '%')
+			if (format[i + 1] == ' ')
 			{
-				_putchar('%');
-				length++;
-				i++;
+				length += process_format_specifier(args, format[i + 2]); 
+				i = i + 2;
+				continue;
 			}
-			else if (format[i + 1] == '\0')
-				break;
-			else if (format[i + 1] != '\0')
-			{
-				if (format_switch(args, format[i + 1], &length) == -1)
-					return (-1);
-				i++;
-			}
+			length += process_format_specifier(args, format[i + 1]);
+			i++; // Skip the next character after %
 		}
 		else
 		{
@@ -43,7 +37,6 @@ int _printf(const char *format, ...)
 			length++;
 		}
 	}
-
 	va_end(args);
 
 	return (length);
@@ -55,13 +48,17 @@ int _printf(const char *format, ...)
  * @length: ...
  * Return: integer
  */
-int format_switch(va_list args, char specifier, int *length)
+int process_format_specifier(va_list args, char specifier)
 {
+	int length;
+
+	length = 0;
+
 	switch (specifier)
 	{
 		case 'c':
 			_putchar(va_arg(args, int));
-			(*length)++;
+			length++;
 			break;
 		case 's':
 			{
@@ -73,18 +70,18 @@ int format_switch(va_list args, char specifier, int *length)
 				for (j = 0; str[j] != '\0'; j++)
 				{
 					_putchar(str[j]);
-					(*length)++;
+					length++;
 				}
 			}
 			break;
 		case '%':
 			_putchar('%');
-			(*length)++;
+			length++;
 			break;
 		default:
 			return (-1);
 	}
-	return (0);
+	return (length);
 }
 /**
  * _putchar - similar to putchar
