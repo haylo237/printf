@@ -66,7 +66,14 @@ int process_format_specifier(va_list args, char specifier)
 			str = va_arg(args, char *);
 
 			if (str == NULL)
-				str = "(null)";
+			{
+				_putchar('(');
+				_putchar('n');
+				_putchar('u');
+				_putchar('l');
+				_putchar('l');
+				return (6);
+			}
 			for (j = 0; str[j] != '\0'; j++)
 			{
 				_putchar(str[j]);
