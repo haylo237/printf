@@ -5,49 +5,89 @@
  * @format: character string
  * Return: length
  */
-int _printf(const char *format, ...) {
-    va_list args;
-    int count = 0;
+int _printf(const char *format, ...)
+{
+	int i, length;
+	va_list args;
 
-    va_start(args, format);
+	length = 0;
 
-    while (*format) {
-        if (*format == '%') {
-            format++;
+	if (format == NULL)
+		return (-1);
 
-            if (*format == 'c') {
-                int c = va_arg(args, int);
-                _putchar(c);
-                count++;
-            } else if (*format == 's') {
-                char *s = va_arg(args, char *);
-                while (*s) {
-                    _putchar(*s);
-                    s++;
-                    count++;
-                }
-            } else if (*format == '%') {
-                _putchar('%');
-                count++;
-            }
-        } else if (*format == '%') {
-            format++;
-            _putchar('%');
-            count++;
-        }
-
-        format++;
-    }
-
-    va_end(args);
-    return count;
+	while (format)
+	{
+		va_start(args, format);
+		for (i = 0; format[i] != '\0'; i++)
+		{
+			if (format[i] == '%' && format[i - 1] != '%')
+			{
+				if (format[i + 1] == '\0')
+					return (-1);
+				if (format[i + 1] == ' ')
+				{
+					length += process_format_specifier(args, format[i + 2]);
+					i = i + 2;
+					continue;
+				}
+				length += process_format_specifier(args, format[i + 1]);
+				i++;
+			}
+			else
+			{
+				_putchar(format[i]);
+				length++;
+			}
+		}
+		va_end(args);
+		return (length);
+	}
+	return (length);
 }
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * process_format_specifier - checks for specifiers
+ * @args: arguments
+ * @specifier: switch cases
+ * Return: integer
+ */
+int process_format_specifier(va_list args, char specifier)
+{
+	int length, j;
+	char *str;
+
+	length = 0;
+
+	switch (specifier)
+	{
+		case 'c':
+			_putchar(va_arg(args, int));
+			length++;
+			break;
+		case 's':
+			str = va_arg(args, char *);
+
+			if (str == NULL)
+				str = "(null)";
+			for (j = 0; str[j] != '\0'; j++)
+			{
+				_putchar(str[j]);
+				length++;
+			}
+			break;
+		case '%':
+			_putchar('%');
+			length++;
+			break;
+		default:
+			return (-1);
+	}
+	return (length);
+}
+/**
+ * _putchar - similar to putchar
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * @c: character to be printed
+ * Return: 0 if successful
  */
 int _putchar(char c)
 {
