@@ -6,6 +6,7 @@
 
 int _printf(const char *format, ...);
 int process_format_specifier(va_list args, char specifier);
+int print_number(int num);
 int _putchar(char c);
 
 #endif
