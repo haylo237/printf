@@ -72,6 +72,7 @@ int process_format_specifier(va_list args, char specifier)
 				_putchar('u');
 				_putchar('l');
 				_putchar('l');
+				_putchar(')');
 				return (6);
 			}
 			for (j = 0; str[j] != '\0'; j++)
