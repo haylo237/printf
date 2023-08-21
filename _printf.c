@@ -28,6 +28,8 @@ int _printf(const char *format, ...)
 				length++;
 				i++;
 			}
+			else if (format[i + 1] == " ")
+				return (-1);
 			else if (format[i + 1] != '\0')
 			{
 				if (format_switch(args, format[i + 1], &length) == -1)
@@ -75,10 +77,10 @@ int format_switch(va_list args, char specifier, int *length)
 				}
 			}
 			break;
-	/*	case '%':*/
-	/*		_putchar('%');*/
-	/*		(*length)++;*/
-	/*		break;*/
+		case '%':
+			_putchar('%');
+			(*length)++;
+			break;
 		default:
 			return (-1);
 	}
