@@ -24,12 +24,12 @@ int _printf(const char *format, ...)
 		{
 			if (format[i + 1] == ' ')
 			{
-				length += process_format_specifier(args, format[i + 2]); 
+				length += process_format_specifier(args, format[i + 2]);
 				i = i + 2;
 				continue;
 			}
 			length += process_format_specifier(args, format[i + 1]);
-			i++; // Skip the next character after %
+			i++;
 		}
 		else
 		{
@@ -42,10 +42,9 @@ int _printf(const char *format, ...)
 	return (length);
 }
 /**
- * format_switch - checks for specifiers
+ * process_format_specifier - checks for specifiers
  * @args: arguments
  * @specifier: switch cases
- * @length: ...
  * Return: integer
  */
 int process_format_specifier(va_list args, char specifier)
