@@ -49,7 +49,8 @@ int _printf(const char *format, ...)
  */
 int process_format_specifier(va_list args, char specifier)
 {
-	int length;
+	int length, j;
+	char *str;
 
 	length = 0;
 
@@ -60,9 +61,7 @@ int process_format_specifier(va_list args, char specifier)
 			length++;
 			break;
 		case 's':
-			char *str;
 			str = va_arg(args, char *);
-			int j;
 
 			if (str == NULL)
 				str = "(null)";
