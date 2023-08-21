@@ -52,8 +52,10 @@ int _printf(const char *format, ...)
  */
 int process_format_specifier(va_list args, char specifier)
 {
-	int length = 0,num, j;
+	int length, j;
 	char *str;
+
+	length = 0;
 
 	switch (specifier)
 	{
@@ -72,18 +74,6 @@ int process_format_specifier(va_list args, char specifier)
 				length++;
 			}
 			break;
-		case 'd':
-		case 'i':
-			num = va_arg(args, int);
-
-			if (num < 0)
-			{
-				_putchar('-');
-				length++;
-				num = -num;
-			}
-			length += print_number(num);
-			break;
 		case '%':
 			_putchar('%');
 			length++;
@@ -91,41 +81,8 @@ int process_format_specifier(va_list args, char specifier)
 		default:
 			return (-1);
 	}
-return (length);
+	return (length);
 }
-
-/**
- * print_number - prints intergers
- * @num: number to be worked on
- * Return: 1 if failed, len if successful
- */
-int print_number(int num)
-{
-	int len = 0;
-	int rev = 0;
-
-	if (num == 0)
-	{
-		_putchar('0');
-		return (1);
-	}
-
-	while (num > 0)
-	{
-		rev = rev * 10 + num % 10;
-		num /= 10;
-	}
-
-	while (rev > 0)
-	{
-		_putchar('0' + rev % 10);
-		rev /= 10;
-		len++;
-	}
-
-	return (len);
-}
-
 /**
  * _putchar - similar to putchar
  *
