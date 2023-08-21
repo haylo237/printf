@@ -61,6 +61,8 @@ int process_format_specifier(va_list args, char specifier)
 		case 'c':
 			_putchar(va_arg(args, int));
 			length++;
+			if (va_arg(args, char *))
+				return (-1);
 			break;
 		case 's':
 			str = va_arg(args, char *);
@@ -78,9 +80,6 @@ int process_format_specifier(va_list args, char specifier)
 			length++;
 			break;
 		default:
-			_putchar('%');
-			_putchar(specifier);
-			length = length + 2;
 			return (-1);
 	}
 	return (length);
