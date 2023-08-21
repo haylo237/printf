@@ -5,7 +5,6 @@
 #include <unistd.h>
 
 int _printf(const char *format, ...);
-int format_switch(va_list args, char specifier, int *length);
 int process_format_specifier(va_list args, char specifier);
 int _putchar(char c);
 
