@@ -8,73 +8,76 @@
  */
 int _printf(const char *format, ...)
 {
-    int i, length = 0;
-    va_list args;
+	int i, length;
+	va_list args;
 
-    va_start(args, format);
+	length = 0;
 
-    for (i = 0; format[i] != '\0'; i++)
-    {
-        if (format[i] == '%')
-        {
-            if (format[i + 1] == '%')
-            {
-                _putchar('%');
-                length++;
-                i++; // Skip the second '%'
-            }
-            else if (format[i + 1] != '\0')
-            {
-                if (format_switch(args, format[i + 1], &length) == -1)
-                    return -1;
-                i++; // Skip the format specifier
-            }
-        }
-        else
-        {
-            _putchar(format[i]);
-            length++;
-        }
-    }
+	va_start(args, format);
 
-    va_end(args);
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				length++;
+				i++;
+			}
+			else if (format[i + 1] != '\0')
+			{
+				if (format_switch(args, format[i + 1], &length) == -1)
+					return (-1);
+				i++;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			length++;
+		}
+	}
 
-    return length;
+	va_end(args);
+
+	return (length);
 }
 /**
  * format_switch - checks for specifiers
- * @args - arguments
- * @specifier - switch cases
- * @length - ...
+ * @args: arguments
+ * @specifier: switch cases
+ * @length: ...
  * Return: integer
  */
 int format_switch(va_list args, char specifier, int *length)
 {
-    switch (specifier)
-    {
-        case 'c':
-            _putchar(va_arg(args, int));
-            (*length)++;
-            break;
-        case 's':
-            {
-                char *str = va_arg(args, char *);
-                int j;
-                for (j = 0; str[j] != '\0'; j++)
-                {
-                    _putchar(str[j]);
-                    (*length)++;
-                }
-            }
-            break;
-        case '%':
-            _putchar('%');
-            (*length)++;
-            break;
-        default:
-            return -1;
-    }
-    return 0;
+	switch (specifier)
+	{
+		case 'c':
+			_putchar(va_arg(args, int));
+			(*length)++;
+			break;
+		case 's':
+			{
+				char *str = va_arg(args, char *);
+				int j;
+
+				for (j = 0; str[j] != '\0'; j++)
+				{
+					_putchar(str[j]);
+					(*length)++;
+				}
+			}
+			break;
+		case '%':
+			_putchar('%');
+			(*length)++;
+			break;
+		default:
+			return (-1);
+	}
+	return (0);
 }
 /**
  * _putchar - similar to putchar
