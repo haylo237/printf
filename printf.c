@@ -81,11 +81,11 @@ int process_format_specifier(va_list args, char specifier)
 			length += print_str(str);
 			break;
 		case '%':
-			_putchar('%');
-			length++;
+			_putchar('%'), length++;
 			break;
 		default:
-			return (-1);
+			_putchar('%'), _putchar(specifier); length = length + 2;
+			break;
 	}
 	return (length);
 }
