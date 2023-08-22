@@ -48,28 +48,27 @@ int _printf(const char *format, ...)
  */
 int process_format_specifier(va_list args, char specifier)
 {
-	int length = 0;
+	int num, length = 0;
+	unsigned int num1;
 	char *str;
 
 	switch (specifier)
 	{
 		case 'b':
-			unsigned int num = va_arg(args, unsigned int);
+			num1 = va_arg(args, unsigned int);
 
-			length += print_bin(num);
+			length += print_bin(num1);
 			break;
 		case 'c':
-			_putchar(va_arg(args, int));
-			length++;
+			_putchar(va_arg(args, int)), length++;
 			break;
 		case 'd':
 		case 'i':
-			int num = va_arg(args, int);
+			num = va_arg(args, int);
 
 			if (num < 0)
 			{
-				_putchar('-');
-				length++;
+				_putchar('-'), length++;
 				num = -num;
 			}
 			length += print_num(num);
