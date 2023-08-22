@@ -111,7 +111,7 @@ int print_rev(char *s)
 	int length;
 
 	length = 0;
-	
+
 	if (s == NULL)
 		return (-1);
 	for (i = 0; s[i] != '\0'; i++)
@@ -122,6 +122,6 @@ int print_rev(char *s)
 	{
 		_putchar(s[i]);
 	}
-	_putchar('\n');
+	/*_putchar('\n');*/
 	return (length - 1);
 }
