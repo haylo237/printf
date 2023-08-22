@@ -114,7 +114,7 @@ int print_rev(char *s)
 
 	if (s == NULL)
 		return (-1);
-	for (i = 0; s[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0', s[i] != '\n'; i++)
 	{
 		length++;
 	}
