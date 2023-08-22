@@ -54,10 +54,9 @@ int process_format_specifier(va_list args, char specifier)
 	switch (specifier)
 	{
 		case 'b':
-			{
-				unsigned int num = va_arg(args, unsigned int);
-				length += print_bin(num);
-			}
+			unsigned int num = va_arg(args, unsigned int);
+
+			length += print_bin(num);
 			break;
 		case 'c':
 			_putchar(va_arg(args, int));
@@ -65,16 +64,14 @@ int process_format_specifier(va_list args, char specifier)
 			break;
 		case 'd':
 		case 'i':
+			int num = va_arg(args, int);
+
+			if (num < 0)
 			{
-				int num = va_arg(args, int);
-				if (num < 0)
-				{
-					_putchar('-');
-					length++;
-					num = -num;
-				}
-				length += print_num(num);
+				_putchar('-'), length++;
+				num = -num;
 			}
+			length += print_num(num);
 			break;
 		case 's':
 			str = va_arg(args, char *);
