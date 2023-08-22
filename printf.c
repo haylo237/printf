@@ -67,11 +67,6 @@ int process_format_specifier(va_list args, char specifier)
 		case 'i':
 			num = va_arg(args, int);
 
-			if (num < 0)
-			{
-				_putchar('-'), length++;
-				num = -num;
-			}
 			length += print_num(num);
 			break;
 		case 's':
