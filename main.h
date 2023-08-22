@@ -11,5 +11,6 @@ int print_num(int num);
 int print_str(const char *str);
 int print_bin(unsigned int num);
 int _putchar(char c);
+int print_rev(char *s);
 
 #endif

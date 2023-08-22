@@ -55,6 +55,9 @@ int process_format_specifier(va_list args, char specifier)
 
 	switch (specifier)
 	{
+		case 'r':
+			length += print_rev(va_arg(args, char *));
+			break;
 		case 'b':
 			num1 = va_arg(args, unsigned int);
 
@@ -95,4 +98,30 @@ int process_format_specifier(va_list args, char specifier)
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
+}
+/**
+ * print_rev - prints a string in reverse
+ *
+ * @s: string to be checked
+ * Return: void
+ */
+int print_rev(char *s)
+{
+	int i;
+	int length;
+
+	length = 0;
+	
+	if (s == NULL)
+		return (-1);
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		length++;
+	}
+	for (i = length - 1; i >= 0; i--)
+	{
+		_putchar(s[i]);
+	}
+	_putchar('\n');
+	return (length - 1);
 }
