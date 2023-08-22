@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1] == '\0')
 					return (-1);
-				if (format[i + 1] == ' ')
+				else if (format[i + 1] == ' ')
 				{
 					length += process_format_specifier(args, format[i + 2]);
 					i = i + 2;
