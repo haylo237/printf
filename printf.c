@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+
 /**
  * _printf - similar to printf
  *
@@ -39,7 +39,6 @@ int _printf(const char *format, ...)
 			}
 		}
 		va_end(args);
-		fflush(stdout);
 		return (length);
 }
 /**
@@ -100,19 +99,5 @@ int process_format_specifier(va_list args, char specifier)
  */
 int _putchar(char c)
 {
-	static char buffer[1024];
-	static int i = 0;
-
-	if (c == '\n' || i == sizeof(buffer))
-	{
-		write(1, buffer, i);
-		i = 0;
-
-		if (c == '\n')
-			write(1, &c, 1);
-	}
-	else
-		buffer[i++] = c;
-
-	return (1);
+	return (write(1, &c, 1));
 }
