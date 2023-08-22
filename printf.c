@@ -48,7 +48,7 @@ int _printf(const char *format, ...)
  */
 int process_format_specifier(va_list args, char specifier)
 {
-	int length, j;
+	int length, num = va_arg(args, int), j;
 	char *str;
 
 	length = 0;
@@ -58,6 +58,16 @@ int process_format_specifier(va_list args, char specifier)
 		case 'c':
 			_putchar(va_arg(args, int));
 			length++;
+			break;
+		case 'd':
+		case 'i':
+			if (num < 0)
+			{
+				_putchar('-');
+				length++;
+				num = -num;
+			}
+			length += print_num(num);
 			break;
 		case 's':
 			str = va_arg(args, char *);
@@ -79,6 +89,40 @@ int process_format_specifier(va_list args, char specifier)
 	}
 	return (length);
 }
+
+/**
+ * print_num - prints number
+ * @num: number input
+ * Return: Length
+ */
+int print_num(int num)
+{
+	int len = 0;
+	int rev = 0;
+
+	if (num == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
+
+	while (num > 0)
+	{
+		rev = rev * 10 + num % 10;
+		num /= 10;
+	}
+
+	while (rev > 0)
+	{
+		_putchar('0' + rev % 10);
+		rev /= 10;
+		len++;
+	}
+
+	return (len);
+}
+
+
 /**
  * _putchar - similar to putchar
  *
