@@ -123,5 +123,5 @@ int print_rev(char *s)
 		_putchar(s[i]);
 	}
 	_putchar('\n');
-	return (length - 1);
+	return (length);
 }
