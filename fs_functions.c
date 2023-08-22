@@ -2,7 +2,7 @@
 
 /**
  * print_num - prints number
- *
+ * @num: integer
  * Return: integer length
  */
 int print_num(int num)
@@ -39,6 +39,7 @@ int print_num(int num)
 int print_str(const char *str)
 {
 	int len = 0;
+
 	if (str == NULL)
 	{
 		str = "(null)";
