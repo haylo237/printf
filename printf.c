@@ -84,7 +84,7 @@ int process_format_specifier(va_list args, char specifier)
 			_putchar('%'), length++;
 			break;
 		default:
-			_putchar('%'), _putchar(specifier); length = length + 2;
+			_putchar('%'), _putchar(specifier), length = length + 2;
 			break;
 	}
 	return (length);
