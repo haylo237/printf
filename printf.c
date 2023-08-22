@@ -68,7 +68,8 @@ int process_format_specifier(va_list args, char specifier)
 
 			if (num < 0)
 			{
-				_putchar('-'), length++;
+				_putchar('-');
+				length++;
 				num = -num;
 			}
 			length += print_num(num);
