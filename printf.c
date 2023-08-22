@@ -15,8 +15,6 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
-	while (format)
-	{
 		va_start(args, format);
 		for (i = 0; format[i] != '\0'; i++)
 		{
@@ -41,8 +39,6 @@ int _printf(const char *format, ...)
 		}
 		va_end(args);
 		return (length);
-	}
-	return (length);
 }
 /**
  * process_format_specifier - checks for specifiers
