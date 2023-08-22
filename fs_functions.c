@@ -2,33 +2,41 @@
 
 /**
  * print_num - prints number
- * @num: integer
+ * @n: integer
  * Return: integer length
  */
-int print_num(int num)
+int print_num(int n)
 {
-	int len = 0, rev = 0;
+	unsigned int m, d, length, count;
 
-	if (num == 0)
+	length = 0;
+
+	if (n < 0)
 	{
-		_putchar('0');
-		return (1);
+		_putchar(45);
+		m = n * -1;
+		length++;
+	}
+	else
+	{
+		m = n;
 	}
 
-	while (num > 0)
+	d = m;
+	count = 1;
+
+	while (d > 9)
 	{
-		rev = rev * 10 + num % 10;
-		num /= 10;
+		d /= 10;
+		count *= 10;
 	}
 
-	while (rev > 0)
+	for (; count >= 1; count /= 10)
 	{
-		_putchar('0' + rev % 10);
-		rev /= 10;
-		len++;
+		_putchar(((m / count) % 10) + 48);
+		length++;
 	}
-
-	return (len);
+	return (length);
 }
 
 /**
