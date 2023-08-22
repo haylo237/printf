@@ -112,7 +112,7 @@ int print_rev(char *s)
 
 	length = 0;
 
-	if (s == NULL || s == "")
+	if (s == NULL)
 		return (-1);
 	for (i = 0; s[i] != '\0'; i++)
 	{
