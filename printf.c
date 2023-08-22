@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 				{
 					length += process_format_specifier(args, format[i + 2]);
 					i = i + 2;
-					return (-1);
+					return (length);
 				}
 				length += process_format_specifier(args, format[i + 1]);
 				i++;
